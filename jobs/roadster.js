@@ -1,10 +1,9 @@
-
 const got = require('got');
 const moment = require('moment-timezone');
 const shell = require('shelljs');
 const { logger } = require('../middleware/logger');
 
-const SPACEX_API = 'https://stage.spacexdata.com/v4';
+const SPACEX_API = 'https://api.spacexdata.com/v4';
 const KEY = process.env.SPACEX_KEY;
 const HEALTHCHECK = process.env.ROADSTER_HEALTHCHECK;
 
@@ -84,15 +83,15 @@ shell.config.silent = true;
  */
 module.exports = async () => {
   try {
-    const orbitParams = await got(ORBIT_URL, {
+    const params = {
       resolveBodyOnly: true,
-    });
-    const earthDist = await got(EARTH_DIST_URL, {
-      resolveBodyOnly: true,
-    });
-    const marsDist = await got(MARS_DIST_URL, {
-      resolveBodyOnly: true,
-    });
+    };
+
+    const [orbitParams, earthDist, marsDist] = await Promise.all([
+      got(ORBIT_URL, params),
+      got(EARTH_DIST_URL, params),
+      got(MARS_DIST_URL, params),
+    ]);
 
     /**
      * All JPL Horizon parsing regexes from https://github.com/lnxbil/stellarium-comet-jpl

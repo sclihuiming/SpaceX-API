@@ -1,4 +1,3 @@
-
 const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate-v2');
 const idPlugin = require('mongoose-id');
@@ -18,7 +17,7 @@ const launchSchema = new mongoose.Schema({
     required: true,
   },
   date_unix: {
-    type: String,
+    type: Number,
     required: true,
   },
   date_local: {
@@ -35,10 +34,10 @@ const launchSchema = new mongoose.Schema({
     default: null,
   },
   static_fire_date_unix: {
-    type: String,
+    type: Number,
     default: null,
   },
-  tdb: {
+  tbd: {
     type: Boolean,
     default: false,
   },

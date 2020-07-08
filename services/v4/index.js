@@ -1,4 +1,3 @@
-
 const Router = require('koa-router');
 const admin = require('./admin/routes');
 const capsules = require('./capsules/routes');
@@ -14,6 +13,7 @@ const ships = require('./ships/routes');
 const users = require('./users/routes');
 const company = require('./company/routes');
 const roadster = require('./roadster/routes');
+const starlink = require('./starlink/routes');
 
 const v4 = new Router({
   prefix: '/v4',
@@ -33,5 +33,6 @@ v4.use(ships.routes());
 v4.use(users.routes());
 v4.use(company.routes());
 v4.use(roadster.routes());
+v4.use(starlink.routes());
 
 module.exports = v4;
